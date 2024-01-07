@@ -194,65 +194,65 @@
 ---
 
   3. **サンプルデータの格納**  
-    1. **channelテーブル データ格納**
-      ```sql
-      INSERT INTO channel (channel_name)
-      VALUES ('news1'),
-             ('entertainment'),
-             ('comedy'),
-             ('anime');
-      ```
+      1. **channelテーブル データ格納**
+        ```sql
+        INSERT INTO channel (channel_name)
+        VALUES ('news1'),
+              ('entertainment'),
+              ('comedy'),
+              ('anime');
+        ```
 
-    2. **programテーブル データ格納**
-      ```sql
-      INSERT INTO program (program_title, program_content)
-      VALUES ('kimetunoyaiba', 'syukansyounennjumpnoninnkimannga'),
-             ('doramaA', 'doramaAnogaiyouyaarasuji'),
-             ('testanime', 'kokokarahajimaru');
-      ```
+      2. **programテーブル データ格納**
+        ```sql
+        INSERT INTO program (program_title, program_content)
+        VALUES ('kimetunoyaiba', 'syukansyounennjumpnoninnkimannga'),
+              ('doramaA', 'doramaAnogaiyouyaarasuji'),
+              ('testanime', 'kokokarahajimaru');
+        ```
 
-    3. **genreテーブル データ格納**
-      ```sql
-      INSERT INTO genre (genre_name)
-      VALUES ('action'),
-             ('dorama'),
-             ('anime');
-      ```
+      3. **genreテーブル データ格納**
+        ```sql
+        INSERT INTO genre (genre_name)
+        VALUES ('action'),
+              ('dorama'),
+              ('anime');
+        ```
 
-    4. **programs_genresテーブル データ格納**
-      ```sql
-      INSERT INTO programs_genres (program_id, genre_id)
-      VALUES (1, 3),
-             (2, 2),
-             (3, 3);
-      ```
+      4. **programs_genresテーブル データ格納**
+        ```sql
+        INSERT INTO programs_genres (program_id, genre_id)
+        VALUES (1, 3),
+              (2, 2),
+              (3, 3);
+        ```
 
-    5. **seasonテーブル データ格納**
-      ```sql
-      INSERT INTO season (season_number, program_id)
-      VALUES (1, 1),
-             (2, 1),
-             (3, 1);
-      ```
+      5. **seasonテーブル データ格納**
+        ```sql
+        INSERT INTO season (season_number, program_id)
+        VALUES (1, 1),
+              (2, 1),
+              (3, 1);
+        ```
 
-    6. **episodeテーブル データ格納**
-      ```sql
-      INSERT INTO episode (episode_number, episode_title, episode_content, play_time, release_date, season_id)
-      VALUES (1, 'zannkoku', 'kamadotannjirohaonitaijiniiku', '00:30:00', '2024-01-15', 1),
-             (2, 'urokodakisakonnji', 'tannjirouhatomiokagiyuuno', '00:30:00', '2024-02-01', 1);
-      ```
-    
-    7. **program_slotテーブル データ格納**
-      ```sql
-      INSERT INTO program_slot (channel_id, program_id)
-      VALUES (17, 1),
-             (17, 3);
-      ```
-
-    8. **time_slotテーブル データ格納**
-      ```sql
-      INSERT INTO time_slot (start_time, end_time, program_slot_id)
-      VALUES ('2024-01-01 00:00:00', '2024-01-01 00:30:00', 1),
-             ('2024-01-01 00:30:00', '2024-01-01 01:00:00', 2);
-      ```
+      6. **episodeテーブル データ格納**
+        ```sql
+        INSERT INTO episode (episode_number, episode_title, episode_content, play_time, release_date, season_id)
+        VALUES (1, 'zannkoku', 'kamadotannjirohaonitaijiniiku', '00:30:00', '2024-01-15', 1),
+              (2, 'urokodakisakonnji', 'tannjirouhatomiokagiyuuno', '00:30:00', '2024-02-01', 1);
+        ```
       
+      7. **program_slotテーブル データ格納**
+        ```sql
+        INSERT INTO program_slot (channel_id, program_id)
+        VALUES (17, 1),
+              (17, 3);
+        ```
+
+      8. **time_slotテーブル データ格納**
+        ```sql
+        INSERT INTO time_slot (start_time, end_time, program_slot_id)
+        VALUES ('2024-01-01 00:00:00', '2024-01-01 00:30:00', 1),
+              ('2024-01-01 00:30:00', '2024-01-01 01:00:00', 2);
+        ```
+        
