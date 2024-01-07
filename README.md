@@ -18,6 +18,7 @@
 |start_time      |DATETIME    |NO          |            |            |            |2024-01-01 00:00:00|
 |end_time        |DATETIME    |NO          |            |            |            |2024-01-01 00:30:00|
 |program_frame_id|BIGINT(20)  |NO          |FOREIGN     |            |            |000000000000       |
+- 外部キー制約：program_frame_id
 
 **番組枠**
 **program_slot テーブル**
@@ -61,8 +62,8 @@
 |カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|例|
 | ----------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- |
 |season_id    |BIGINT(20)  |NO          |PRIMARY     |            |YES         |000000000000|
-|program_id   |BIGINT(20)  |NO          |FOREIGN     |            |            |000000000000|
 |season_number|BIGINT(10)  |NO          |            |            |            |1           |
+|program_id   |BIGINT(20)  |NO          |FOREIGN     |            |            |000000000000|
 - 外部キー制約：program_id
 
 **エピソード**
@@ -70,7 +71,7 @@
 |カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|例|
 | ------------ | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- |
 |episode_id    |BIGINT(20)  |NO          |PRIMARY     |            |YES         |000000000000|
-|episode_number|BIGINT(20)  |NO          |            |            |            |000000000000|
+|episode_number|BIGINT(20)  |NO          |            |            |            |1           |
 |title         |VARCHAR(100)|NO          |            |            |            |残酷        |
 |content       |TEXT        |NO          |            |            |            |家族と共に山..|
 |play_time     |TIME        |NO          |            |            |            |01:00:00    |
