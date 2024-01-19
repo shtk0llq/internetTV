@@ -119,7 +119,7 @@ FOREIGN KEY (channel_id) REFERENCES channels (channel_id),
 FOREIGN KEY (program_id) REFERENCES programs (program_id));
 
 -- genresテーブル作成
-CREATE TABLE genre (
+CREATE TABLE genres (
 genre_id BIGINT NOT NULL AUTO_INCREMENT,
 genre_name VARCHAR(100) NOT NULL,
 PRIMARY KEY (genre_id),
