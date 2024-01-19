@@ -1,100 +1,83 @@
 # インターネットTV
 
-## テーブル設計
-**チャンネル**  
-**channel テーブル**
-|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|例|
-| ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- |
-|channel_id  |BIGINT      |NO          |PRIMARY     |            |YES         |000000000000|
-|channel_name|VARCHAR(100)|NO          |UNIQUE      |            |            |ニュース1    |
+## ステップ1（テーブル設計）
+**channels テーブル**
+|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|
+| ----- | ----- | ----- | ----- | ----- | ----- |
+|channel_id  |BIGINT      |NO     |PRIMARY|       |YES    |
+|channel_name|VARCHAR(100)|NO     |UNIQUE |       |       |
 - ユニークキー制約：channel_name  
-同じチャンネル名があることで重複データが存在することになる為
 
 ---
 
-**時間帯**  
-**time_slot テーブル**
-|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|例|
-| ------------- | ---------- | ---------- | ---------- | ---------- | ---------- | ----------------- |
-|time_slot_id   |BIGINT      |NO          |PRIMARY     |            |YES         |000000000000       |
-|start_time     |DATETIME    |NO          |            |            |            |2024-01-01 00:00:00|
-|end_time       |DATETIME    |NO          |            |            |            |2024-01-01 00:30:00|
-|program_slot_id|BIGINT      |NO          |FOREIGN     |            |            |000000000000       |
-- 外部キー制約：program_slot_id
+**programs テーブル**
+|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|
+| ----- | ----- | ----- | ----- | ----- | ----- |
+|program_id    |BIGINT      |NO     |PRIMARY|       |YES    |
+|program_name  |VARCHAR(100)|NO     |UNIQUE |       |       |
+|program_detail|TEXT        |NO     |       |       |       |
+- ユニークキー制約：program_name
 
 ---
 
-**番組枠**  
-**program_slot テーブル**
-|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|例|
-| ------------- | ---------- | ---------- | ---------- | ---------- | ---------- | ----------------- |
-|program_slot_id|BIGINT      |NO          |PRIMARY     |            |YES         |000000000000       |
-|channel_id     |BIGINT      |NO          |FOREIGN     |            |            |000000000000       |
-|program_id     |BIGINT      |NO          |FOREIGN     |            |            |000000000000       |
+**time_slots テーブル**
+|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|
+| ----- | ----- | ----- | ----- | ----- | ----- |
+|time_slot_id|BIGINT  |NO     |PRIMARY|       |YES    |
+|channel_id  |BIGINT  |NO     |FOREIGN|       |       |
+|program_id  |BIGINT  |NO     |FOREIGN|       |       |
+|start_time  |DATETIME|NO     |       |       |       |
+|end_time    |DATETIME|NO     |       |       |       |
+|view_count  |BIGINT  |NO     |FOREIGN|       |       |
 - 外部キー制約：channel_id
 - 外部キー制約：program_id
 
 ---
 
-**番組**  
-**program テーブル**
-|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|例|
-| ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- |
-|program_id  |BIGINT      |NO          |PRIMARY     |            |YES         |000000000000|
-|title       |VARCHAR(100)|NO          |            |            |            |鬼滅の刃     |
-|content     |TEXT        |NO          |            |            |            |「週刊少年ジ..|
-
----
-
-**ジャンル**  
-**genre テーブル**
-|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|例|
-| ---------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- |
-|genre_id    |BIGINT      |NO          |PRIMARY     |            |YES         |000000000000|
-|genre_name  |VARCHAR(100)|NO          |UNIQUE      |            |            |ニュース／報道|
+**genres テーブル**
+|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|
+| ----- | ----- | ----- | ----- | ----- | ----- |
+|genre_id  |BIGINT      |NO     |PRIMARY|       |YES    |
+|genre_name|VARCHAR(100)|NO     |UNIQUE |       |       |
 - ユニークキー制約：genre_name  
-同じジャンル名があることで重複データが存在することになる為
 
 ---
 
-**番組 ジャンル**  
-**programs_genres テーブル**
-|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|例|
-| ---------------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- |
-|programs_genres_id|BIGINT      |NO          |PRIMARY     |            |YES         |000000000000|
-|program_id        |BIGINT      |NO          |FOREIGN     |            |            |000000000000|
-|genre_id          |BIGINT      |NO          |FOREIGN     |            |            |000000000000|
+**program_genres テーブル**
+|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|
+| ----- | ----- | ----- | ----- | ----- | ----- |
+|programs_genres_id|BIGINT |NO     |PRIMARY|       |YES    |
+|program_id        |BIGINT |NO     |FOREIGN|       |       |
+|genre_id          |BIGINT |NO     |FOREIGN|       |       |
 - 外部キー制約：program_id
 - 外部キー制約：genre_id
 
 ---
 
-**シーズン**  
-**season テーブル**
-|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|例|
-| ----------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- |
-|season_id    |BIGINT      |NO          |PRIMARY     |            |YES         |000000000000|
-|season_number|INT         |NO          |            |            |            |1           |
-|program_id   |BIGINT      |NO          |FOREIGN     |            |            |000000000000|
+**seasons テーブル**
+|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|
+| ----- | ----- | ----- | ----- | ----- | ----- |
+|season_id    |BIGINT |NO     |PRIMARY|       |YES    |
+|season_number|INT    |NO     |       |       |       |
+|program_id   |BIGINT |NO     |FOREIGN|       |       |
 - 外部キー制約：program_id
 
 ---
 
-**エピソード**  
-**episode テーブル**
-|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|例|
-| ------------- | ---------- | ---------- | ---------- | ---------- | ---------- | ---------- |
-|episode_id     |BIGINT      |NO          |PRIMARY     |            |YES         |000000000000|
-|episode_number |INT         |NO          |            |            |            |1           |
-|episode_title  |VARCHAR(100)|NO          |            |            |            |残酷        |
-|epicode_content|TEXT        |NO          |            |            |            |家族と共に山..|
-|play_time      |TIME        |NO          |            |            |            |01:00:00    |
-|release_date   |DATE        |NO          |            |            |            |2024-01-01  |
-|views          |BIGINT      |NO          |            |0           |            |0           |
-|season_id      |BIGINT      |YES         |FOREIGN     |            |            |000000000000|
+**episodes テーブル**
+|カラム名|データ型|NULL|キー|初期値|AUTO INCREMENT|
+| ----- | ----- | ----- | ----- | ----- | ----- |
+|episode_id    |BIGINT      |NO     |PRIMARY|       |YES    |
+|program_id    |BIGINT      |NO     |FOREIGN|       |       |
+|season_id     |BIGINT      |YES    |FOREIGN|       |       |
+|episode_number|BIGINT      |NO     |       |       |       |  
+|episode_name  |VARCHAR(100)|NO     |       |       |       |
+|epicode_detail|TEXT        |NO     |       |       |       |
+|duration      |TIME        |NO     |       |       |       |
+|release_date  |DATE        |NO     |       |       |       |
+|view_count    |BIGINT      |NO     |       |0      |       |
+- 外部キー制約：program_id
 - 外部キー制約：season_id
-
----
 
 ## テーブル構築手順
 1. **データベース作成**
