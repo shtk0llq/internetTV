@@ -83,6 +83,9 @@
 ### データベース作成
   ```sql
   CREATE DATABASE internet_tv;
+  ```
+
+  ```sql
   USE internet_tv;
   ```
 
@@ -152,7 +155,7 @@ release_date DATE NOT NULL,
 view_count BIGINT NOT NULL DEFAULT 0,
 PRIMARY KEY (episode_id),
 FOREIGN KEY (program_id) REFERENCES programs (program_id),
-FOREIGN KEY (season_id) REFERENCES season (season_id));
+FOREIGN KEY (season_id) REFERENCES seasons (season_id));
 ```
 
 ### サンプルデータ格納  
