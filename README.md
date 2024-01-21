@@ -320,16 +320,17 @@ SELECT program_name AS '番組タイトル', season_number AS 'シーズン数',
 
 **3. 本日の番組表を表示するために、本日、どのチャンネルの、何時から、何の番組が放送されるのかを知りたいです。本日放送される全ての番組に対して、チャンネル名、放送開始時刻(日付+時間)、放送終了時刻、シーズン数、エピソード数、エピソードタイトル、エピソード詳細を取得してください。なお、番組の開始時刻が本日のものを本日方法される番組とみなすものとします**
 ```sql
-SELECT channel_name AS 'チャンネル名', start_time AS '放送開始時刻', end_time AS '放送終了時刻', season_number AS 'シーズン数', episode_number AS 'エピソード数', episode_name AS 'エピソードタイトル', episode_detail AS 'エピソード詳細' FROM time_slots INNER JOIN channels ON time_slots.channel_id = channels.channel_id INNER JOIN episodes ON time_slots.episode_id = episodes.episode_id LEFT OUTER JOIN seasons ON episodes.season_id = seasons.season_id WHERE DATE(start_time) = CURDATE() ORDER BY time_slot_id;
+SELECT channel_name AS 'チャンネル名', start_time AS '放送開始時刻', end_time AS '放送終了時刻', season_number AS 'シーズン数', episode_number AS 'エピソード数', episode_name AS 'エピソードタイトル', episode_detail AS 'エピソード詳細' FROM time_slots INNER JOIN channels ON time_slots.channel_id = channels.channel_id INNER JOIN episodes ON time_slots.episode_id = episodes.episode_id LEFT OUTER JOIN seasons ON episodes.season_id = seasons.season_id WHERE DATE(start_time) = '2024-01-20' ORDER BY time_slot_id;
 ```
 
 **4. ドラマというチャンネルがあったとして、ドラマのチャンネルの番組表を表示するために、本日から一週間分、何日の何時から何の番組が放送されるのかを知りたいです。ドラマのチャンネルに対して、放送開始時刻、放送終了時刻、シーズン数、エピソード数、エピソードタイトル、エピソード詳細を本日から一週間分取得してください**
 ```sql
-
+SELECT start_time AS '放送開始時刻', end_time AS '放送終了時刻', season_number AS 'シーズン数', episode_number AS 'エピソード数', episode_name AS 'エピソードタイトル', episode_detail AS 'エピソード詳細' FROM time_slots INNER JOIN channels ON time_slots.channel_id = channels.channel_id INNER JOIN episodes ON time_slots.episode_id = episodes.episode_id LEFT OUTER JOIN seasons ON episodes.season_id = seasons.season_id WHERE channel_name LIKE '%ドラマ%' AND DATE(start_time) BETWEEN '2024-01-15' AND '2024-01-21' ORDER BY start_time;
 ```
 
 **5. 直近一週間で最も見られた番組が知りたいです。直近一週間に放送された番組の中で、エピソード視聴数合計トップ2の番組に対して、番組タイトル、視聴数を取得してください**
 ```sql
+-- SELECT program_name AS '番組タイトル', episodes.view_count AS '視聴数' FROM time_slots INNER JOIN programs ON time_slots.program_id = programs.program_id INNER JOIN episodes ON time_slots.episode_id = episodes.episode_id WHERE start_time BETWEEN '2024-01-15' AND '2024-01-22' ORDER BY episodes.view_count DESC LIMIT 2;
 ```
 
 **6. ジャンルごとの番組の視聴数ランキングを知りたいです。番組の視聴数ランキングはエピソードの平均視聴数ランキングとします。ジャンルごとに視聴数トップの番組に対して、ジャンル名、番組タイトル、エピソード平均視聴数を取得してください。**
